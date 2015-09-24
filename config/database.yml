@@ -20,17 +20,20 @@ default: &default
 development:
   <<: *default
   database: hackdashboard_development
+  host: localhost
   username: <%= ENV['HACK_DEVELOPMENT_DATABASE_USERNAME']%>
   password: <%= ENV['HACK_DEVELOPMENT_DATABASE_PASSWORD'] %>
 
 test:
   <<: *default
   database: hackdashboard_test
+  host: localhost
   username: <%= ENV['HACK_TEST_DATABASE_USERNAME']%>
   password: <%= ENV['HACK_TEST_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
   database: hackdashboard_production
+  host:     <%= ENV['HACK_PRODUCTION_DATABASE_HOST'] %>
   username: <%= ENV['HACK_PRODUCTION_DATABASE_USERNAME']%>
   password: <%= ENV['HACK_PRODUCTION_DATABASE_PASSWORD'] %>
