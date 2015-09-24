@@ -1,0 +1,36 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  port: 5432
+
+development:
+  <<: *default
+  database: hackdashboard_development
+  username: <%= ENV['HACK_DEVELOPMENT_DATABASE_USERNAME']%>
+  password: <%= ENV['HACK_DEVELOPMENT_DATABASE_PASSWORD'] %>
+
+test:
+  <<: *default
+  database: hackdashboard_test
+  username: <%= ENV['HACK_TEST_DATABASE_USERNAME']%>
+  password: <%= ENV['HACK_TEST_DATABASE_PASSWORD'] %>
+
+production:
+  <<: *default
+  database: hackdashboard_production
+  username: <%= ENV['HACK_PRODUCTION_DATABASE_USERNAME']%>
+  password: <%= ENV['HACK_PRODUCTION_DATABASE_PASSWORD'] %>
