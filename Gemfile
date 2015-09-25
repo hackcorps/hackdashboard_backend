@@ -35,6 +35,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'guard-rspec'
+	gem 'better_errors'
+	gem 'quiet_assets'
 end
 
 # Need use require: false for gems
