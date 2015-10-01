@@ -4,7 +4,7 @@ RSpec.describe Api::V1::Users::SessionsController, type: :controller do
 	context 'SIGN_IN' do
 		context 'AS ADMIN' do
 			describe 'POST #create' do
-			
+
 			end
 		end
 

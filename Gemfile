@@ -22,7 +22,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
-gem "haml-rails", "~> 0.9"
+gem 'haml-rails', '~> 0.9'
+gem 'pundit'
 
 group :production do
 	gem 'rails_12factor'
@@ -37,6 +38,8 @@ group :development, :test do
   gem 'guard-rspec'
 	gem 'better_errors'
 	gem 'quiet_assets'
+  gem 'factory_girl_rails'
+	gem 'faker'
 end
 
 # Need use require: false for gems
