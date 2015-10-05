@@ -21,6 +21,10 @@ class  OrganizationsController < ApplicationController
     @organization.destroy!
     render json:  {organization: @organization }, status: 204
   end
+  def show
+    @organization = Organization.find(params[:id])
+    render json:  {organization: @organization }, status: 200
+  end
   private
   def organization_params
     params.require(:organization).permit( :name )
