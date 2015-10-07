@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'haml-rails', '~> 0.9'
 gem 'pundit'
-
+gem 'rails_admin'
 group :production do
 	gem 'rails_12factor'
 end
@@ -38,7 +38,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'guard-rspec'
 	gem 'better_errors'
-	gem 'quiet_assets'
   gem 'factory_girl_rails'
 	gem 'faker'
 end
