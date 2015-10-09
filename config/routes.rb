@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-	mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
- 	devise_for :user
 
 	resources :organizations
 	root 'home#index'
@@ -12,6 +10,9 @@ Rails.application.routes.draw do
 			devise_for :users, controllers: { sessions: 'api/v1/users/sessions', passwords: 'api/v1/users/passwords' }
 		end
 	end
+
+	devise_for :admins
+	mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
 	# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
