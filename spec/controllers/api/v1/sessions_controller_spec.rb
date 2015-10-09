@@ -3,8 +3,24 @@ require 'rails_helper'
 RSpec.describe Api::V1::Users::SessionsController, type: :controller do
 	context 'SIGN_IN' do
 		context 'AS ADMIN' do
-			describe 'POST #create' do
+			before(:each) do
+				@request.env["devise.mapping"] = Devise.mappings[:admin]
+			end
 
+			describe 'POST #create' do
+				context 'valid attributes'do
+					it 'email and password' do
+						#admin = FactoryGirl.create(:admin)
+
+						#post :create, { user: { email: admin.email, password: admin.password } }
+
+						#expect(controller.current_user).to eq(admin)
+					end
+				end
+
+				context 'invalid attributes' do
+
+				end
 			end
 		end
 
@@ -25,5 +41,9 @@ RSpec.describe Api::V1::Users::SessionsController, type: :controller do
 
 			end
 		end
+	end
+
+	context 'SIGH_OUT' do
+
 	end
 end

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-def impersonate
-  self.update(email: 'change@gmail.com')
-end
+
+	def impersonate
+    self.update(email: 'change@gmail.com')
+	end
 end
