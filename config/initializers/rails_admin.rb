@@ -32,7 +32,7 @@ RailsAdmin.config do |config|
 
 
   config.model User do
-    devise :database_authenticatable, :registerable, :confirmable, :recoverable, stretches: 20
+    
   end
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
