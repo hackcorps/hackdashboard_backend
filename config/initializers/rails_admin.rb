@@ -14,29 +14,15 @@ RailsAdmin.config do |config|
   # end
   # config.current_user_method(&:current_user)
 
-  RailsAdmin.config do |config|
-    config.authenticate_with do
-      warden.authenticate! scope: :admin
-    end
-    config.current_user_method(&:current_admin)
-  end
+	config.authenticate_with do
+    warden.authenticate! scope: :admin
+	end
 
-  #RailsAdmin.config do |config|
-    #config.authorize_with do
-     # redirect_to main_app.root_path unless current_user.is_admin?
-   # end
-  #end
+  config.current_user_method(&:current_admin)
 
-  ## == Cancan ==
-  # config.authorize_with :cancan
-
-  ## == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
-
-  #config.model User do
-   # new :new
-  #end
+	config.authorize_with do
+		redirect_to main_app.root_path unless current_admin.is_admin?
+	end
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.actions do

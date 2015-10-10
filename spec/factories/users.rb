@@ -7,20 +7,20 @@ FactoryGirl.define do
 		password Faker::Internet.password
 
 		factory :admin do
-			role_id FactoryGirl.create(:role_admin).id
+			role 'Admin'
 		end
 
 		factory :customer do
-			role_id FactoryGirl.create(:role_customer).id
+			role 'Customer'
 		end
 
 		factory :team_member do
-			role_id FactoryGirl.create(:role_team_member).id
+			role 'TeamMember'
 			cost_per_month 1500
 		end
 
 		factory :project_manager do
-			role_id FactoryGirl.create(:role_project_manager).id
+			role 'ProjectManager'
 			cost_per_month 2000
 		end
 	end
