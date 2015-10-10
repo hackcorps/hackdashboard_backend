@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+	ROLES = %w(Admin Customer TeamMember ProjectManager)
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-def impersonate
-  self.update(email: 'change@gmail.com')
-end
+         :recoverable, :rememberable, :trackable
+
+	validates :email, presence: true
+	validates :password, presence: true, allow_blank: false, on: :create
+
+	def is_admin?
+		self.role == 'Admin'
+	end
 end
