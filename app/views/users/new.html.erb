@@ -1,0 +1,35 @@
+<div class="page_wrapper preorder_wrapper">
+  <div class="container">
+    <div class="row preorder_container">
+      <div class="col s12 m12 l12 preorder_section">
+        <div class="preorder_headline">
+          <p>Create User</p>
+        </div>
+      </div>
+      <%= form_for @user  do |f| %>
+          <div class="col s8 m8 l8">
+
+            <hr class="preorder_hr">
+            <div class="row preorder_form">
+
+
+              <div class="input-field col s11 m11 l11 preorder_input">
+                <%= f.password_field  :password, :placeholder => "password", :required => true  %>
+              </div>
+              <div class="input-field col s11 m11 l11 preorder_input">
+                <%= f.password_field :password_confirmation, :placeholder => "password confirm", :required => true  %>
+              </div>
+              <div class="input-field col s11 m11 l11 preorder_input">
+                <%= f.hidden_field  :invite_token %>
+              </div>
+            </div>
+            <hr class="preorder_hr">
+
+            <div class="col s4 m4 l4 submit_mobile">
+              <%= f.submit "SUBMIT", :class => "btn btn-default preorder_button preorder_preloader_button"  %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
