@@ -8,4 +8,12 @@ Rails.application.routes.draw do
 
 	devise_for :users,:path_prefix => 'api/v1', controllers: { sessions: 'api/v1/users/sessions' }
 
+  namespace :api do
+		namespace :v1 do
+     #	 resource :users
+    end
+  end
+
+	get 'users' => 'users#new', as: 'users_register'
+	post 'users' => 'users#create'
 end

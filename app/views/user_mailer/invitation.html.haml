@@ -1,0 +1,5 @@
+%p Hello  @email !
+%p You are invited to  ...
+%p Admin has requested a link to confirm your invite. You can do this through the link below.
+= link_to 'Confirm your invite',  users_register_url(invite_token: @invite_token), :class => "contact_mailer_brand_logo"
+%p If you didn't request this, please ignore this email.
