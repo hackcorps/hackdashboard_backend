@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
 	get 'users' => 'users#new', as: 'users_register'
 	post 'users' => 'users#create'
+
+	get '/api/' => 'application#api'
 end

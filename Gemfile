@@ -27,6 +27,9 @@ gem 'haml-rails', '~> 0.9'
 gem 'pundit'
 gem 'rails_admin'
 
+# API
+gem 'swagger-docs'
+
 group :production do
 	gem 'rails_12factor'
 end
