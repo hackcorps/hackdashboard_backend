@@ -1,16 +1,31 @@
 class User < ActiveRecord::Base
+	before_create :send_invite
+
 	ROLES = %w(Admin Customer TeamMember ProjectManager)
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+	devise :database_authenticatable, :registerable,
+				 :recoverable, :rememberable, :trackable
 
-	validates :email,  presence: true
-	validates :password, presence: true, allow_blank: false, on: :create
+	validates :email, presence: true
+	validates :email, uniqueness: { case_sensitive: false }
+	validates :password, presence: true, allow_blank: false, on: :create, :unless => lambda { self.full_name.blank? }
 	validates :password, confirmation: true
 	validates :password_confirmation, presence: true, unless: 'password.nil?'
 
-	attr_accessor :invite_token
 	def is_admin?
 		self.role == 'Admin'
+	end
+
+	def send_invite
+		generate_token
+		UserMailer.invitation(self.email, self.invite_token).deliver_now
+	end
+
+	protected
+	def generate_token
+		self.invite_token = loop do
+			random_token = SecureRandom.urlsafe_base64(nil, false)
+			break random_token unless User.exists?(invite_token: random_token)
+		end
 	end
 end

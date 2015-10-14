@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012091052) do
+ActiveRecord::Schema.define(version: 20151013162204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "invitations", force: :cascade do |t|
-    t.string "email"
-    t.string "invite_token"
-  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -47,12 +42,12 @@ ActiveRecord::Schema.define(version: 20151012091052) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "last_name"
     t.integer  "cost_per_month",         default: 0,  null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "role"
+    t.string   "invite_token"
+    t.string   "full_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
