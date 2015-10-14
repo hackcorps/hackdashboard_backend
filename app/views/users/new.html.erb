@@ -11,8 +11,9 @@
 
             <hr class="preorder_hr">
             <div class="row preorder_form">
-
-
+              <div class="input-field col s11 m11 l11 preorder_input">
+                <%= f.text_field  :full_name, :placeholder => "full name", :required => true  %>
+              </div>
               <div class="input-field col s11 m11 l11 preorder_input">
                 <%= f.password_field  :password, :placeholder => "password", :required => true  %>
               </div>

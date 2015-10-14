@@ -24,9 +24,15 @@ RailsAdmin.config do |config|
 		redirect_to main_app.root_path unless current_admin.is_admin?
   end
 
-  config.model Invitation do
-    exclude_fields :invite_token
+  config.model User do
+      create do
+        field :email
+        field :role, :enum do
+          enum { User::ROLES }
+        end
+      end
   end
+
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.actions do
