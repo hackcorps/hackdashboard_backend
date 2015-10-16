@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	has_many :projects_users
+	has_many :projects, through: :projects_users
+
 	before_create :send_invite
 
 	ROLES = %w(Admin Customer TeamMember ProjectManager)
@@ -16,12 +19,14 @@ class User < ActiveRecord::Base
 		self.role == 'Admin'
 	end
 
-	def send_invite
-		generate_token
-		UserMailer.invitation(self.email, self.invite_token).deliver_now
-	end
 
-	protected
+
+	private
+
+	def send_invite
+	generate_token
+	UserMailer.invitation(self.email, self.invite_token).deliver_now
+end
 	def generate_token
 		self.invite_token = loop do
 			random_token = SecureRandom.urlsafe_base64(nil, false)

@@ -10,12 +10,10 @@ Rails.application.routes.draw do
 
   namespace :api do
 		namespace :v1 do
-     #	 resource :users
+     	 resource :users
     end
   end
 
-	get 'users' => 'users#new', as: 'users_register'
-	post 'users' => 'users#create'
-
-	get '/api/' => 'home#api'
+	#get 'users' => 'users#new', as: 'users_register'
+	#post 'users' => 'users#create'
 end
