@@ -33,6 +33,11 @@ RailsAdmin.config do |config|
       end
   end
 
+  config.model ProjectsUser do
+    label "Project of User"
+    label_plural "Projects of Users"
+
+  end
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.actions do
