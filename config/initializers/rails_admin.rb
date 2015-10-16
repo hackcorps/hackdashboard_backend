@@ -25,12 +25,25 @@ RailsAdmin.config do |config|
   end
 
   config.model User do
+    object_label_method do
+    :custom_label_method
+  end
       create do
         field :email
         field :role, :enum do
           enum { User::ROLES }
         end
-      end
+        end
+  end
+
+  def custom_label_method
+    "#{full_name}"
+  end
+
+  config.model Project do
+    object_label_method do
+      :custom_label_method_project
+    end
   end
 
   config.model ProjectsUser do
@@ -39,6 +52,9 @@ RailsAdmin.config do |config|
 
   end
 
+  def custom_label_method_project
+    "#{name}"
+  end
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.actions do
    # collection :new do     # subclass Base. Accessible at /admin/<model_name>/my_collection_action

@@ -4,7 +4,6 @@ class ProjectsUser < ActiveRecord::Base
   after_create :send_invite
 
    def send_invite
-    binding.pry
-    UserMailer.invitation('sofia.nabivanec@gmail.com', 'zzzzzzz').deliver_now
+   # UserMailer.invitation('sofia.nabivanec@gmail.com', 'zzzzzzz').deliver_now
   end
 end
