@@ -1,4 +1,19 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
+	swagger_controller :sessions, "Sessions"
+
+	swagger_api :create do
+		summary 'Create a user session.'
+    param :user, :email, :string, :required, 'Email address'
+		param :user, :password, :string, :required, 'Password'
+		response :unauthorized
+	end
+
+	swagger_api :destroy do
+		summary 'Destroy a user session.'
+    param :user, :email, :string, :required, 'Email address'
+		param :user, :auth_token, :string, :required, 'Authentication token'
+		response :unauthorized
+	end
 
 	def create
 		@user = User.new(user_params)
@@ -12,7 +27,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def destroy
-		sign_out(current_user)
+		user = User.find_for_database_authentication(email: params[:user][:email]) #TODO AuthToken
+		sign_out(user)
 
 		render json: { }, status: 200
 	end

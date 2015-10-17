@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+	get 'api' => 'home#api'
+
 	#get 'users' => 'users#new', as: 'users_register'
 	#post 'users' => 'users#create'
 end
