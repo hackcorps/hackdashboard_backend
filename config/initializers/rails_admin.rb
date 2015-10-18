@@ -26,14 +26,22 @@ RailsAdmin.config do |config|
 
   config.model User do
     object_label_method do
-    :custom_label_method
-  end
-      create do
-        field :email
-        field :role, :enum do
-          enum { User::ROLES }
-        end
-        end
+      :custom_label_method
+    end
+    create do
+      field :email
+      field :role, :enum do
+        enum { User::ROLES }
+      end
+    end
+    configure :projects_users do
+      visible(false)
+    end
+    configure :projects do
+      orderable(true) # only for multiselect widget currently. Will add the possibility to order blocks
+      # configuration here
+    end
+    include_fields :id, :email, :role, :full_name, :projects
   end
 
   def custom_label_method
@@ -44,12 +52,19 @@ RailsAdmin.config do |config|
     object_label_method do
       :custom_label_method_project
     end
+    configure :projects_users do
+      visible(false)
+    end
+    configure :users do
+      orderable(true) # only for multiselect widget currently. Will add the possibility to order blocks
+      # configuration here
+    end
+    exclude_fields :updated_at
   end
 
   config.model ProjectsUser do
     label "Project of User"
     label_plural "Projects of Users"
-
   end
 
   def custom_label_method_project
