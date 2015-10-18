@@ -6,11 +6,13 @@ Rails.application.routes.draw do
 
 	resources :organizations
 
-	devise_for :users,:path_prefix => 'api/v1', controllers: { sessions: 'api/v1/users/sessions' }
+	devise_for :users,:path_prefix => 'api/v1', controllers: {
+                                                sessions: 'api/v1/users/sessions',
+                                                registrations: 'api/v1/users/registrations'
+                                            }
 
   namespace :api do
 		namespace :v1 do
-     	 resource :users
     end
   end
 
