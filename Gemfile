@@ -26,7 +26,7 @@ gem 'jwt'
 gem 'haml-rails', '~> 0.9'
 gem 'pundit'
 gem 'rails_admin'
-
+gem 'rack-cors'
 # API
 gem 'swagger-docs'
 
