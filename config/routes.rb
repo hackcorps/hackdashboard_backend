@@ -11,13 +11,5 @@ Rails.application.routes.draw do
                                                 registrations: 'api/v1/users/registrations'
                                             }
 
-  namespace :api do
-		namespace :v1 do
-    end
-  end
-
 	get 'api' => 'home#api'
-
-	#get 'users' => 'users#new', as: 'users_register'
-	#post 'users' => 'users#create'
 end

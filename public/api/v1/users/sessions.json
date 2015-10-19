@@ -11,15 +11,15 @@
           "summary": "Create a user session.",
           "parameters": [
             {
-              "paramType": "user",
-              "name": "email",
+              "paramType": "form",
+              "name": "user[email]",
               "type": "string",
               "description": "Email address",
               "required": true
             },
             {
-              "paramType": "user",
-              "name": "password",
+              "paramType": "form",
+              "name": "user[password]",
               "type": "string",
               "description": "Password",
               "required": true
@@ -30,6 +30,11 @@
               "code": 401,
               "responseModel": null,
               "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
             }
           ],
           "method": "post",
@@ -44,14 +49,7 @@
           "summary": "Destroy a user session.",
           "parameters": [
             {
-              "paramType": "user",
-              "name": "email",
-              "type": "string",
-              "description": "Email address",
-              "required": true
-            },
-            {
-              "paramType": "user",
+              "paramType": "form",
               "name": "auth_token",
               "type": "string",
               "description": "Authentication token",
