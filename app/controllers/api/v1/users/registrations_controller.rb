@@ -1,6 +1,5 @@
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def create
-    bind
     @user = User.find_by(invite_token: params[:invite_token])
     if(@user)
       if @user.update(full_name: params[:full_name], password: params[:password],
