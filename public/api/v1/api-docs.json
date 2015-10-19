@@ -3,6 +3,9 @@
   "swaggerVersion": "1.2",
   "basePath": "http://localhost:3000/api/v1/",
   "apis": [
-
+    {
+      "path": "users/sessions.{format}",
+      "description": "Sessions"
+    }
   ]
 }
