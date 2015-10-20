@@ -35,7 +35,7 @@ module Hack
       #end
     #end
 
-    config.middleware.use 0, "Rack::Cors"  do
+    config.middleware.use "Rack::Cors"  do
       allow do
         origins '*'
         resource '*',
