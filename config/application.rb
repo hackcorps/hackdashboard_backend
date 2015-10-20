@@ -31,7 +31,7 @@ module Hack
         origins '*'
         resource '*',
                  :headers => ['Origin', 'Accept', 'Content-Type'],
-                 :methods => [:get, :post, :put, :options]
+                 :methods => [:get, :post, :put, :delete, :options]
       end
     end
 
