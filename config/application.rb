@@ -30,8 +30,8 @@ module Hack
       allow do
         origins '*'
         resource '*',
-                 :headers => ['Origin', 'Accept', 'Content-Type'],
-                 :methods => [:get, :post, :put, :delete, :options]
+                 :headers => ['Origin', 'Accept', 'Content-Type',  'Overwrite', 'Destination', 'Depth', 'User-Agent', 'X-File-Size', 'X-Requested-With', 'If-Modified-Since', 'X-File-Name', 'Cache-Control'],
+                 :methods => [:options, :get, :post, :put, :delete ]
       end
     end
 
