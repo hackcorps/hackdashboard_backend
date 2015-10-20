@@ -26,16 +26,21 @@ module Hack
    #     'Access-Control-Allow-Origin' => '*',
     #    'Access-Control-Request-Method' => '*'
     #}
+    #config.middleware.use Rack::Cors do
+     # allow do
+      #  origins '*'
+       # resource '*',
+        #         :headers => ['Origin', 'Accept', 'Content-Type',  'Overwrite', 'Destination', 'Depth', 'User-Agent', 'X-File-Size', 'X-Requested-With', 'If-Modified-Since', 'X-File-Name', 'Cache-Control'],
+         #        :methods => [:options, :get, :post, :put, :delete ]
+      #end
+    #end
 
-
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.use 0, "Rack::Cors"  do
       allow do
         origins '*'
         resource '*',
-                 :headers => :any,
-                 :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-                 :credentials => true,
-                 :max_age => 0
+                 :headers => ['Origin', 'Accept', 'Content-Type',  'Overwrite', 'Destination', 'Depth'],
+                 :methods => [:get, :post, :delete, :put, :patch, :options, :head]
       end
     end
 
