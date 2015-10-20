@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
 	resources :organizations
 
-	devise_for :users,:path_prefix => 'api/v1', :path_names => {:sign_out => 'sign_out/:id'}, controllers: {
+	devise_for :users,:path_prefix => 'api/v1', controllers: {
                                                 sessions: 'api/v1/users/sessions',
                                                 registrations: 'api/v1/users/registrations'
                                             }
