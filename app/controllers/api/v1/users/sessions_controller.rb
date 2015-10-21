@@ -16,9 +16,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 		param :form, :auth_token, :string, :required, 'Authentication token'
 		response :unauthorized
 	end
-	def verify_signed_out_user
 
-	end
 
 	def create
 		@user = User.new(user_params)
