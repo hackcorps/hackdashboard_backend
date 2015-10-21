@@ -1,6 +1,6 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
 	swagger_controller :sessions, "Sessions"
-
+	skip_before_action :verify_signed_out_user
 
 
 	swagger_api :create do
@@ -17,7 +17,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 		response :unauthorized
 	end
 
-
 	def create
 		@user = User.new(user_params)
 
@@ -33,9 +32,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
 
 		user = AuthenticationService.authenticate_user(params[:auth_token])
-		binding.pry
 		sign_out(user)
-		binding.pry
+
 		render json: { success: true }, status: 200
 	end
 
