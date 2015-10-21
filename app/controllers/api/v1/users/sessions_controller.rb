@@ -34,8 +34,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	def destroy
 
 
-		#user = AuthenticationService.authenticate_user(params[:auth_token])
-		#sign_out(user)
+		user = AuthenticationService.authenticate_user(params[:auth_token])
+		sign_out(user)
 
 		render json: { success: true }, status: 200
 	end

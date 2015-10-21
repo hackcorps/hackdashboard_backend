@@ -51,7 +51,7 @@ module Hack
         resource '*',
                  :headers => :any,
                  :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-                  :credentials => false
+                 :credentials => false
       end
     end
 
