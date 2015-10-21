@@ -33,8 +33,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
 
 		user = AuthenticationService.authenticate_user(params[:auth_token])
+		binding.pry
 		sign_out(user)
-
+		binding.pry
 		render json: { success: true }, status: 200
 	end
 
