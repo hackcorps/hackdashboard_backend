@@ -34,13 +34,24 @@ module Hack
          #        :methods => [:options, :get, :post, :put, :delete ]
       #end
     #end
+    #config.middleware.insert_before 0, "Rack::Cors" do
+     # allow do
+      #  origins '*'
+       # resource '*',
+        #         :headers => ['Origin', 'Accept', 'Content-Type'],
+         #        :methods => [:get, :post, :delete, :put, :patch, :options, :head],
+          #
+          #       :max_age => 0
+      #end
+    #end
 
-    config.middleware.use "Rack::Cors"  do
+    config.middleware.insert_before 0, "Rack::Cors"  do
       allow do
         origins '*'
         resource '*',
-                 :headers => ['Origin', 'Accept', 'Content-Type',  'Overwrite', 'Destination', 'Depth'],
-                 :methods => [:get, :post, :delete, :put, :patch, :options, :head]
+                 :headers => :any,
+                 :methods => [:get, :post, :delete, :put, :patch, :options, :head],
+                  :credentials => false
       end
     end
 
