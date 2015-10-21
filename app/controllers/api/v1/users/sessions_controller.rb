@@ -1,7 +1,5 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
 	swagger_controller :sessions, "Sessions"
-	skip_before_action :verify_signed_out_user
-
 
 	swagger_api :create do
 		summary 'Create a user session.'
@@ -29,8 +27,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def destroy
-
-
 		user = AuthenticationService.authenticate_user(params[:auth_token])
 		sign_out(user)
 
