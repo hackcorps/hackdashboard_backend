@@ -1,6 +1,6 @@
 HOSTS = {
   development: 'http://localhost:3000',
-  production: 'hackdashboard.heroku.com'
+	production: 'http://hackdashboard.herokuapp.com/'
 }
 
 Swagger::Docs::Config.register_apis({

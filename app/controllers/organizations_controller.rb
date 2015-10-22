@@ -10,24 +10,29 @@ class  OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(organization_params)
+
     if @organization.save
-      render json: { status: true }, status: 201
+      render json: {}, status: 200
     else
-      render json: { status: false, errors: @organization.errors.full_messages }, status: 422
+      render json: { errors: @organization.errors.full_messages }, status: 422
     end
   end
+
+  def show
+    @organization = Organization.find(params[:id])
+    render json:  { organization: @organization }, status: 200
+  end
+
   def destroy
     @organization = Organization.find(params[:id])
     @organization.destroy!
-    render json:  {organization: @organization }, status: 204
-  end
-  def show
-    @organization = Organization.find(params[:id])
-    render json:  {organization: @organization }, status: 200
-  end
-  private
-  def organization_params
-    params.require(:organization).permit( :name )
+
+    render json:  { organization: @organization }, status: 204
   end
 
+  private
+
+  def organization_params
+    params.require(:organization).permit(:name)
+  end
 end

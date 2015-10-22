@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "hackdashboard.heroku.com/api/v1/",
+  "basePath": "http://hackdashboard.herokuapp.com/api/v1/",
   "resourcePath": "sessions",
   "apis": [
     {
@@ -27,14 +27,9 @@
           ],
           "responseMessages": [
             {
-              "code": 401,
+              "code": 400,
               "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
+              "message": "Bad Request"
             }
           ],
           "method": "post",
@@ -58,9 +53,9 @@
           ],
           "responseMessages": [
             {
-              "code": 401,
+              "code": 204,
               "responseModel": null,
-              "message": "Unauthorized"
+              "message": "No Content"
             }
           ],
           "method": "delete",

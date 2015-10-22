@@ -18,5 +18,4 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-
-end 
+end

@@ -5,14 +5,13 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 		summary 'Create a user session.'
     param :form, 'user[email]', :string, :required, 'Email address'
 		param :form, 'user[password]', :string, :required, 'Password'
-		response :unauthorized
-    response :not_found
+		response :bad_request
 	end
 
 	swagger_api :destroy do
 		summary 'Destroy a user session.'
 		param :form, :auth_token, :string, :required, 'Authentication token'
-		response :unauthorized
+		response :no_content
 	end
 
 	def create
@@ -35,7 +34,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def sign_in_user(resource)
-		sign_in(resource, store: false)
+		sign_in(resource)
 
 		render json: {
 										user: {
