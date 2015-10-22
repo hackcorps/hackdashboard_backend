@@ -17,8 +17,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
 	def create
 		return failer unless User.new(user_params).valid?
-		user = User.find_by_email!(params[:user][:email])
-		user.valid_password?(params[:user][:password]) ? sign_in_user(user) : failer
+		user = User.find_by_email(params[:user][:email])
+		user && user.valid_password?(params[:user][:password]) ? sign_in_user(user) : failer
 	end
 
 	def destroy
