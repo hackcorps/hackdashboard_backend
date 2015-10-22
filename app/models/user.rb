@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable,
 				 :recoverable, :rememberable, :trackable
 
-	validates :email, presence: true
-	validates :email, uniqueness: { case_sensitive: false }
+	validates :email, format: Devise.email_regexp
 	validates :password, presence: true, allow_blank: false, on: :create, :unless => lambda { self.full_name.blank? }
+	validates_confirmation_of :password, on: :create
 
 	def is_admin?
 		self.role == 'Admin'
@@ -31,4 +31,3 @@ class User < ActiveRecord::Base
 		end
 	end
 end
-

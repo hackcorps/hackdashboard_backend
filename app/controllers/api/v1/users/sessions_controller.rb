@@ -16,25 +16,37 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def create
-		@user = User.new(user_params)
-
-		if User.find_by_email!(@user.email) && @user.valid?
-			sign_in(user)
-			render json: { user: { email: @user.email, role: @user.role, auth_token: AuthenticationService.new(@user).auth_token } }
-		else
-			render json: { errors: @user.errors.full_messages }
-		end
+		return failer unless User.new(user_params).valid?
+		user = User.find_by_email!(params[:user][:email])
+		user.valid_password?(params[:user][:password]) ? sign_in_user(user) : failer
 	end
 
 	def destroy
 		user = AuthenticationService.authenticate_user(params[:auth_token])
 		sign_out(user)
 
-		render json: { success: true }, status: 200
+		render json: {}, status: 200
 	end
 
 	private
+
 	def user_params
 		params.require(:user).permit(:email, :password)
+	end
+
+	def sign_in_user(resource)
+		sign_in(resource)
+
+		render json: {
+										user: {
+														email: resource.email,
+														role: resource.role,
+														auth_token: AuthenticationService.new(resource).auth_token
+										}
+		}
+	end
+
+	def failer
+		render json: { error: I18n.t('devise.failure.invalid') }, status: 400
 	end
 end
