@@ -1,1 +1,1 @@
-worker: bundle exec rake swagger:docs
+worker: RAILS_ENV=production bundle exec rake swagger:docs
