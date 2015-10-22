@@ -27,6 +27,10 @@ gem 'haml-rails', '~> 0.9'
 gem 'pundit'
 gem 'rails_admin'
 gem 'rack-cors'
+
+# Server
+gem 'puma'
+
 # API
 gem 'swagger-docs'
 
