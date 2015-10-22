@@ -35,7 +35,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def sign_in_user(resource)
-		sign_in(resource)
+		sign_in(resource, store: false)
 
 		render json: {
 										user: {
