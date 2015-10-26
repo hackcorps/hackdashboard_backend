@@ -1,6 +1,6 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
 	swagger_controller :sessions, "Sessions"
-
+	skip_before_action :verify_authenticity_token
 	swagger_api :create do
 		summary 'Create a user session.'
     param :form, 'user[email]', :string, :required, 'Email address'

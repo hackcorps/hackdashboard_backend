@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016124518) do
+ActiveRecord::Schema.define(version: 20151026101715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,23 +21,6 @@ ActiveRecord::Schema.define(version: 20151016124518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "organization_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "projects", ["organization_id"], name: "index_projects_on_organization_id", using: :btree
-
-  create_table "projects_users", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "user_id"
-  end
-
-  add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id", using: :btree
-  add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -61,5 +44,14 @@ ActiveRecord::Schema.define(version: 20151016124518) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "projects", "organizations"
+  create_table "users_organizations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "users_organizations", ["organization_id"], name: "index_users_organizations_on_organization_id", using: :btree
+  add_index "users_organizations", ["user_id"], name: "index_users_organizations_on_user_id", using: :btree
+
 end
