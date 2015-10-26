@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :projects_user do
+  factory :users_organization do
     
   end
 

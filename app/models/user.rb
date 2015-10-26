@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-	has_many :projects_users, dependent: :delete_all
-	has_many :projects, through: :projects_users
+	has_many :users_organizations, dependent: :delete_all
+	has_many :organizations, through: :users_organizations
 
 	before_create :send_invite
 
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
 	def send_invite
 	  generate_token
-	  UserMailer.invitation(self.email, self.invite_token).deliver_now
+	  UserMailer.invitation(self.email, self.invite_token,self.organizations.last).deliver_now
 	end
 
 	def generate_token
@@ -31,3 +31,4 @@ class User < ActiveRecord::Base
 		end
 	end
 end
+
