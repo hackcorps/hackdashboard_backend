@@ -1,5 +1,8 @@
 class  OrganizationsController < ApplicationController
+  before_action :authenticate_user_from_token!
+
   def index
+
     @organizations = Organization.all
     render json: { organizations: @organizations }, status: 200
   end

@@ -1,6 +1,14 @@
-class Api::V1::Users::SessionsController < Devise::SessionsController
+class Api::V1::Users::SessionsController < ApplicationController
+  before_action :authenticate_user_from_token!, only: :destroy
+
 	swagger_controller :sessions, "Sessions"
-	skip_before_action :verify_authenticity_token
+
+	# Disable CSRF protection
+  skip_before_action :verify_authenticity_token
+
+	# Be sure to enable JSON.
+	respond_to :html, :json
+
 	swagger_api :create do
 		summary 'Create a user session.'
     param :form, 'user[email]', :string, :required, 'Email address'
@@ -12,7 +20,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 		summary 'Destroy a user session.'
 		param :form, :auth_token, :string, :required, 'Authentication token'
 		response :no_content
-	end
+  end
 
 	def create
 		return failer unless User.new(user_params).valid?
@@ -21,9 +29,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def destroy
-		user = AuthenticationService.authenticate_user(params[:auth_token])
-		sign_out(user)
-
+		AuthenticationService.expired(@current_user)
 		render json: {}, status: 200
 	end
 
@@ -34,8 +40,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 	end
 
 	def sign_in_user(resource)
-		sign_in(resource)
-
 		render json: {
 										user: {
 														email: resource.email,
