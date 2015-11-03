@@ -5,9 +5,9 @@ class UserMailer < ApplicationMailer
     @organization = organization
     mail(to: @email, subject: 'Invite')
   end
-  def notification_user(user,organization)
-    @user = user
+  def notification_user(email, full_name, organization)
+    @full_name = full_name
     @organization = organization
-    mail(to: @user.email, subject: 'Added to project')
+    mail(to: email, subject: 'Added to a organization')
   end
 end
