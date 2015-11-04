@@ -20,8 +20,7 @@ class User < ActiveRecord::Base
 	private
 
 	def send_invite
-	  generate_token
-	  UserMailer.invitation(self.email, self.invite_token,self.organizations.last).deliver_now
+		UserMailer.invitation(self.email, self.invite_token,self.organizations.last.name).deliver_now
 	end
 
 	def generate_token
