@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	validates :email, format: Devise.email_regexp
 	validates :password, presence: true, allow_blank: false, on: :create, :unless => lambda { self.full_name.blank? }
 	validates_confirmation_of :password, on: :create
+	validates :organizations, presence: true
 
 	def is_admin?
 		self.role == 'Admin'
