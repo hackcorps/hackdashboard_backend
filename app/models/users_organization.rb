@@ -3,6 +3,8 @@ class UsersOrganization < ActiveRecord::Base
   belongs_to :organization
   after_save :send_notification_user
   validates_uniqueness_of :organization_id, :scope => :user_id
+  validates :organization, presence: true
+  validates :user, presence: true
 
   def send_notification_user
     if user.full_name.present?
