@@ -4,12 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 	rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 	rescue_from JWT::DecodeError, with: :unauthenticated
-
+	rescue_from JWT::ExpiredSignature, with: :unauthenticated
   private
 
 	attr_reader :current_user
 
   def authenticate_user_from_token!
+		binding.pry
 		@current_user = AuthenticationService.authenticate_user(verify_jwt_token)
 	end
 

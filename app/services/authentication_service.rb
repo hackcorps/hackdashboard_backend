@@ -16,6 +16,7 @@ class AuthenticationService
   end
 
   def self.expired(current_user)
+    binding.pry
     JWT.encode({ exp: 3.day.ago.to_i, id: current_user.id }, SECRET_KEY)
   end
 

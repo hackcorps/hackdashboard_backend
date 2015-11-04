@@ -23,13 +23,12 @@ class Api::V1::Users::SessionsController < ApplicationController
   end
 
 	def create
-		return failer unless User.new(user_params).valid?
+		#return failer unless User.new(user_params).valid?
 		user = User.find_by_email(params[:user][:email])
 		user && user.valid_password?(params[:user][:password]) ? sign_in_user(user) : failer
 	end
 
 	def destroy
-		AuthenticationService.expired(@current_user)
 		render json: {}, status: 200
 	end
 
