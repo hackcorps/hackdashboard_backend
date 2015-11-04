@@ -5,7 +5,9 @@ class UsersOrganization < ActiveRecord::Base
   validates_uniqueness_of :organization_id, :scope => :user_id
 
   def send_notification_user
-    UserMailer.notification_user(user.email, user.full_name, organization.name).deliver_now
+    if user.full_name.present?
+      UserMailer.notification_user(user.email, user.full_name, organization.name).deliver_now
+    end
   end
 
 

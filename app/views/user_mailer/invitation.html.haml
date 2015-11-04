@@ -4,8 +4,8 @@
  !
 %p
  You are invited to
- = @organization.name
+ = @organization
  organization
 %p Admin has requested a link to confirm your invite. You can do this through the link below.
-= link_to 'Confirm your invite',  'http://hackdashboardfrontend.herokuapp.com/#home/register?invite_token='+@invite_token+'&organization='+@organization.name,  :class => "contact_mailer_brand_logo"
+= link_to 'Confirm your invite',  'http://hackdashboardfrontend.herokuapp.com/#home/register?invite_token='+@invite_token.to_s+'&organization='+@organization,  :class => "contact_mailer_brand_logo"
 %p If you didn't request this, please ignore this email.

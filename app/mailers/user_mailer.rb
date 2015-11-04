@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  #default from: 'ytjcontact@gmail.com'
+
   def invitation(email,invite_token,organization)
     @email = email
     @invite_token = invite_token
