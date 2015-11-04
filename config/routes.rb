@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
 	devise_for :users,:path_prefix => 'api/v1', controllers: {
                                                 sessions: 'api/v1/users/sessions',
-                                                registrations: 'api/v1/users/registrations'
+                                                registrations: 'api/v1/users/registrations',
+																								passwords: 'api/v1/users/passwords'
                                             }
 
 	get 'api' => 'home#api'
