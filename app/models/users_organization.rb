@@ -9,10 +9,7 @@ class UsersOrganization < ActiveRecord::Base
   validates :user, presence: true
 
   def send_notification_user
-    if user.full_name.present?
-      UserMailer.notification_user(user.email, user.full_name, organization.name).deliver_now
-    end
+    UserMailer.notification_user(user.email, user.full_name, organization.name).deliver_now if user.full_name.present?
   end
-
 
 end

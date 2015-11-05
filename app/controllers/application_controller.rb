@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 	attr_reader :current_user
 
   def authenticate_user_from_token!
-		binding.pry
 		@current_user = AuthenticationService.authenticate_user(verify_jwt_token)
 	end
 

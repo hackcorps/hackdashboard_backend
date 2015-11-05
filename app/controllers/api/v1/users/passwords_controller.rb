@@ -4,11 +4,10 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 
   def create
     @user = User.send_reset_password_instructions(params[:user])
-    binding.pry
     if successfully_sent?(@user)
-      render :status => 200, :json => {:success => true}
+      render json: { success: true }, status: 200
     else
-      render :status => 422, :json => { :errors => @user.errors.full_messages }
+      render json: { errors: @user.errors.full_messages }, status: 422,
     end
   end
 
@@ -18,7 +17,7 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 
     if @user.errors.empty?
       @user.unlock_access! if unlockable?(@user)
-      render json: { status: true }
+      render json: { status: true }, status: 200
     else
       render json: { status: false, errors: @user.errors.full_messages }
     end
