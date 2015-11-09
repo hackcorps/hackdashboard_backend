@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105151115) do
+ActiveRecord::Schema.define(version: 20151109141724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "milestones", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "percent_complete", precision: 5, scale: 2
+    t.datetime "data_started"
+    t.integer  "due_date"
+    t.integer  "cost"
+    t.integer  "organization_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "milestones", ["organization_id"], name: "index_milestones_on_organization_id", using: :btree
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -55,4 +68,5 @@ ActiveRecord::Schema.define(version: 20151105151115) do
   add_index "users_organizations", ["organization_id"], name: "index_users_organizations_on_organization_id", using: :btree
   add_index "users_organizations", ["user_id"], name: "index_users_organizations_on_user_id", using: :btree
 
+  add_foreign_key "milestones", "organizations"
 end

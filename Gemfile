@@ -45,6 +45,6 @@ group :development, :test do
 	gem 'better_errors'
   gem 'factory_girl_rails'
 	gem 'faker'
+  gem 'shoulda-matchers', '~> 3.0'
 end
-
 # Need use require: false for gems
