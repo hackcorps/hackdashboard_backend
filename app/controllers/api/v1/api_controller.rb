@@ -16,7 +16,7 @@ class Api::V1::ApiController < ActionController::Base
 
     protected
 
-    # For all responses in this controller, return the CORS access control headers.
+    # For all responses in this controller, return the CORS acHow I learned to test mcess control headers.
 
     def cors_set_access_control_headers
       headers['Access-Control-Allow-Origin'] = '*'
