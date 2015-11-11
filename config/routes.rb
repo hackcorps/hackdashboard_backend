@@ -14,5 +14,12 @@ Rails.application.routes.draw do
 
 	get 'api' => 'home#api'
 
+	namespace :api do
+		namespace :v1 do
+      resource :milestones
+    end
+  end
+
+
 
 end

@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Milestone, type: :model do
-
+    let(:organization)  { FactoryGirl.create(:organization) }
+    let(:milestone) {Milestone.new( name: 'Task 1',
+                                    due_date: Faker::Number.between(1, 100),
+                                    organization_id: organization.id)}
     it { should belong_to :organization }
 
     it { should respond_to(:name) }
@@ -21,5 +24,17 @@ RSpec.describe Milestone, type: :model do
       it { should_not allow_value("1Inv4lid_").for(:name) }
     end
 
+    describe 'set default value ' do
+      it ' should percent_complete' do
+        expect(milestone.percent_complete).not_to be_nil
+        milestone.save!
+        expect(milestone.percent_complete).not_to be_nil
+      end
+      it ' should data_started' do
+        expect(milestone.data_started).not_to be_nil
+        milestone.save!
+        expect(milestone.data_started).not_to be_nil
+      end
+    end
 
 end
