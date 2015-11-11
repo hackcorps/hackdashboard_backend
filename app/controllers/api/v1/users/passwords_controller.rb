@@ -7,7 +7,7 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
     if successfully_sent?(@user)
       render json: { success: true }, status: 200
     else
-      render json: { errors: @user.errors.full_messages }, status: 422,
+      render json: { errors: @user.errors.full_messages }, status: 422
     end
   end
 
