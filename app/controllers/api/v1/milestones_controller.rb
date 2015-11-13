@@ -1,4 +1,9 @@
 class Api::V1::MilestonesController < ApplicationController
+  before_action :authenticate_user_from_token!
+
+  def index
+    render json: { milestones: current_user.organizations.first.milestones }, status: 200
+  end
 
   def create
     @milestone = Milestone.new(milestone_params)

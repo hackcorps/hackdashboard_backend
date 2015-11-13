@@ -5,12 +5,13 @@ class ApplicationController < ActionController::Base
 	rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 	rescue_from JWT::DecodeError, with: :unauthenticated
 	rescue_from JWT::ExpiredSignature, with: :unauthenticated
-  private
 
 	attr_reader :current_user
 
+	private
+
   def authenticate_user_from_token!
-		@current_user = AuthenticationService.authenticate_user(verify_jwt_token)
+		@current_user ||= AuthenticationService.authenticate_user(verify_jwt_token)
 	end
 
 	def verify_jwt_token
@@ -24,5 +25,4 @@ class ApplicationController < ActionController::Base
 	def unauthenticated
 		render json: {}, status: 401
 	end
-
 end

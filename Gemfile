@@ -46,5 +46,6 @@ group :development, :test do
   gem 'factory_girl_rails'
 	gem 'faker'
   gem 'shoulda-matchers', '~> 3.0'
+  gem 'database_cleaner'
 end
 # Need use require: false for gems
