@@ -12,7 +12,6 @@ RSpec.describe  OrganizationsController, type: :controller do
     end
     it 'responds with organizations' do
       get :index
-
       expect(JSON.parse(response.body)['organizations']).not_to be_nil
     end
   end
