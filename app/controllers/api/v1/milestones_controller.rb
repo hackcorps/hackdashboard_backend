@@ -13,7 +13,6 @@ class Api::V1::MilestonesController < ApplicationController
     param :form, 'milestone[percent_complete]', :decimal, :optional, 'Percent Complete'
     param :form, 'milestone[organization_id]', :integer, :required, 'Organization ID'
     response :bad_request
-    response :una
   end
 
   def index
