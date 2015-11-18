@@ -1,0 +1,225 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000/api/v1/",
+  "resourcePath": "milestones",
+  "apis": [
+    {
+      "path": "milestones",
+      "operations": [
+        {
+          "summary": "Return all milestone of organization.",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::Milestones#index"
+        }
+      ]
+    },
+    {
+      "path": "milestones",
+      "operations": [
+        {
+          "summary": "Create a milestone.",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "milestone[name]",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[due_date]",
+              "type": "integer",
+              "description": "Due Date",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[cost]",
+              "type": "integer",
+              "description": "Cost",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[data_started]",
+              "type": "datetime",
+              "description": "Data Started",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[percent_complete]",
+              "type": "decimal",
+              "description": "Percent Complete",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "post",
+          "nickname": "Api::V1::Milestones#create"
+        }
+      ]
+    },
+    {
+      "path": "milestones/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing milestone",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Milestone Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[name]",
+              "type": "string",
+              "description": "Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[due_date]",
+              "type": "integer",
+              "description": "Due Date",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[cost]",
+              "type": "integer",
+              "description": "Cost",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[data_started]",
+              "type": "datetime",
+              "description": "Data Started",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[percent_complete]",
+              "type": "decimal",
+              "description": "Percent Complete",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "milestone[organization_id]",
+              "type": "integer",
+              "description": "Organization ID",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "method": "patch",
+          "nickname": "Api::V1::Milestones#update"
+        }
+      ]
+    },
+    {
+      "path": "milestones/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing milestone",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Milestone Id",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "method": "delete",
+          "nickname": "Api::V1::Milestones#destroy"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Milestone": {
+      "id": "Milestone",
+      "required": [
+        "id",
+        "name",
+        "due_date",
+        "organization_id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Milestone Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "due_date": {
+          "type": "integer",
+          "description": "Due Date"
+        },
+        "cost": {
+          "type": "integer",
+          "description": "Cost"
+        },
+        "percent_complete": {
+          "type": "decimal",
+          "description": "Percent Complete"
+        },
+        "data_started": {
+          "type": "datetime",
+          "description": "Data Started"
+        },
+        "organization_id": {
+          "type": "integer",
+          "description": "Organization Id"
+        }
+      },
+      "description": "A Milestone object."
+    }
+  }
+}
