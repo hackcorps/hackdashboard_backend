@@ -1,6 +1,7 @@
 class Api::V1::MilestonesController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :find_milestone, only: [:update, :destroy]
+  respond_to :json
 
   swagger_controller :milestones, 'Milestones'
 
@@ -11,8 +12,43 @@ class Api::V1::MilestonesController < ApplicationController
     param :form, 'milestone[cost]', :integer, :optional, 'Cost'
     param :form, 'milestone[data_started]', :datetime, :optional, 'Data Started'
     param :form, 'milestone[percent_complete]', :decimal, :optional, 'Percent Complete'
-    param :form, 'milestone[organization_id]', :integer, :required, 'Organization ID'
-    response :bad_request
+    response :unauthorized
+  end
+
+  swagger_api :index do
+    summary 'Return all milestone of organization.'
+    response :unauthorized
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing milestone'
+    param :path, :id, :integer, :required, "Milestone Id"
+    param :form, 'milestone[name]', :string, :optional, 'Name'
+    param :form, 'milestone[due_date]', :integer, :optional, 'Due Date'
+    param :form, 'milestone[cost]', :integer, :optional, 'Cost'
+    param :form, 'milestone[data_started]', :datetime, :optional, 'Data Started'
+    param :form, 'milestone[percent_complete]', :decimal, :optional, 'Percent Complete'
+    param :form, 'milestone[organization_id]', :integer, :optional, 'Organization ID'
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing milestone"
+    param :path, :id, :integer, :required, "Milestone Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_model :Milestone do
+    description "A Milestone object."
+    property :id, :integer, :required, "Milestone Id"
+    property :name, :string, :required, "Name"
+    property :due_date, :integer, :required, "Due Date"
+    property :cost, :integer, :optional, "Cost"
+    property :percent_complete, :decimal, :optional, "Percent Complete"
+    property :data_started, :datetime, :optional, "Data Started"
+    property :organization_id, :integer, :required, "Organization Id"
   end
 
   def index
