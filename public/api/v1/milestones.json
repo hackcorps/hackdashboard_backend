@@ -98,7 +98,7 @@
             {
               "paramType": "form",
               "name": "milestone[due_date]",
-              "type": "integer",
+              "type": "date",
               "description": "Due Date",
               "required": false
             },
@@ -186,8 +186,7 @@
       "required": [
         "id",
         "name",
-        "due_date",
-        "organization_id"
+        "due_date"
       ],
       "properties": {
         "id": {
@@ -199,7 +198,7 @@
           "description": "Name"
         },
         "due_date": {
-          "type": "integer",
+          "type": "date",
           "description": "Due Date"
         },
         "cost": {
@@ -213,10 +212,6 @@
         "data_started": {
           "type": "datetime",
           "description": "Data Started"
-        },
-        "organization_id": {
-          "type": "integer",
-          "description": "Organization Id"
         }
       },
       "description": "A Milestone object."
