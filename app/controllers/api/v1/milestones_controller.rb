@@ -1,5 +1,6 @@
 class Api::V1::MilestonesController < ApplicationController
   before_action :authenticate_user_from_token!
+  before_action :set_organization_current_user, only: [:create]
   before_action :find_milestone, only: [:update, :destroy]
   respond_to :json
 
@@ -24,7 +25,7 @@ class Api::V1::MilestonesController < ApplicationController
     summary 'Updates an existing milestone'
     param :path, :id, :integer, :required, "Milestone Id"
     param :form, 'milestone[name]', :string, :optional, 'Name'
-    param :form, 'milestone[due_date]', :integer, :optional, 'Due Date'
+    param :form, 'milestone[due_date]', :date, :optional, 'Due Date'
     param :form, 'milestone[cost]', :integer, :optional, 'Cost'
     param :form, 'milestone[data_started]', :datetime, :optional, 'Data Started'
     param :form, 'milestone[percent_complete]', :decimal, :optional, 'Percent Complete'
@@ -44,11 +45,10 @@ class Api::V1::MilestonesController < ApplicationController
     description "A Milestone object."
     property :id, :integer, :required, "Milestone Id"
     property :name, :string, :required, "Name"
-    property :due_date, :integer, :required, "Due Date"
+    property :due_date, :date, :required, "Due Date"
     property :cost, :integer, :optional, "Cost"
     property :percent_complete, :decimal, :optional, "Percent Complete"
     property :data_started, :datetime, :optional, "Data Started"
-    property :organization_id, :integer, :required, "Organization Id"
   end
 
   def index
@@ -56,6 +56,7 @@ class Api::V1::MilestonesController < ApplicationController
   end
 
   def create
+    binding.pry
     @milestone = Milestone.new(milestone_params)
     if @milestone.save
       render json: { milestone: @milestone }, status: 201
@@ -84,7 +85,11 @@ class Api::V1::MilestonesController < ApplicationController
     @milestone = Milestone.find(params[:id])
   end
 
+  def set_organization_current_user
+    params[:milestone][:organization_id] ||= @current_user.organizations.first.id
+  end
   def milestone_params
+
     params.require(:milestone).permit(:name, :percent_complete, :data_started, :due_date, :cost, :organization_id)
   end
 end

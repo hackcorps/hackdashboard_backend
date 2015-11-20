@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109141724) do
+ActiveRecord::Schema.define(version: 20151120180502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20151109141724) do
     t.string   "name"
     t.decimal  "percent_complete", precision: 5, scale: 2
     t.datetime "data_started"
-    t.integer  "due_date"
     t.integer  "cost"
     t.integer  "organization_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.date     "due_date"
   end
 
   add_index "milestones", ["organization_id"], name: "index_milestones_on_organization_id", using: :btree
