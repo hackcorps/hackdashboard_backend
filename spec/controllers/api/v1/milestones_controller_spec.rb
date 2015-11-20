@@ -9,9 +9,18 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
       name: 'Task 1',
       percent_complete: 45,
       data_started: Faker::Date.between(2.days.ago, Date.today),
-      due_date: Faker::Number.between(1, 100),
+      due_date: Faker::Date.between(Date.today, 2.days.from_now),
       cost: 120,
       organization_id: organization_first.id
+    }
+  end
+  let(:valid_attributes_without_organization) do
+    {
+        name: 'Task 1',
+        percent_complete: 45,
+        data_started: Faker::Date.between(2.days.ago, Date.today),
+        due_date: Faker::Date.between(Date.today, 2.days.from_now),
+        cost: 120
     }
   end
   let(:invalid_attributes){ {invalid: 'invalid'} }
@@ -49,6 +58,11 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
     context 'with valid params' do
       it 'creates milestone' do
         expect { post :create, milestone: valid_attributes }.to change(Milestone, :count).by(1)
+      end
+      it 'creates milestone for a current user' do
+        post :create, milestone: valid_attributes_without_organization
+        milestone = Milestone.last
+        expect( milestone.organization).to eq(@current_user.organizations.first)
       end
       it 'responds with milestone' do
         post :create, milestone: valid_attributes
