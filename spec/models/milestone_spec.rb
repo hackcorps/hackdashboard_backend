@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Milestone, type: :model do
     let(:organization)  { FactoryGirl.create(:organization) }
     let(:milestone) {Milestone.new( name: 'Task 1',
-                                    due_date: Faker::Number.between(1, 100),
+                                    due_date: Faker::Date.between(Date.today, 2.days.from_now),
                                     organization_id: organization.id)}
     it { should belong_to :organization }
 
