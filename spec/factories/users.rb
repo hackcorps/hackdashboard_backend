@@ -15,6 +15,7 @@ FactoryGirl.define do
 		factory :team_member, parent: :user do
 			role 'TeamMember'
 			cost_per_month 1500
+
 		end
 
 		factory :project_manager, parent: :user do
