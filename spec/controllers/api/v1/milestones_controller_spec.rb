@@ -64,6 +64,15 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
         milestone = Milestone.last
         expect( milestone.organization).to eq(@current_user.organizations.first)
       end
+      it 'creates milestone for a current user without organization' do
+        @current_user.organizations.delete_all
+
+        post :create, milestone: valid_attributes_without_organization
+
+        milestone = Milestone.last
+
+        expect( response.status ). to eq(422)
+      end
       it 'responds with milestone' do
         post :create, milestone: valid_attributes
         expect(JSON.parse(response.body)['milestone']).not_to be_nil

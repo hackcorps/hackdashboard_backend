@@ -1,5 +1,6 @@
 class Milestone < ActiveRecord::Base
   belongs_to :organization
+  has_many :stand_ups
   after_initialize :init
 
 

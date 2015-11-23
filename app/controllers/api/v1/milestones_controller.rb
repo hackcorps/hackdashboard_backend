@@ -56,7 +56,6 @@ class Api::V1::MilestonesController < ApplicationController
   end
 
   def create
-    binding.pry
     @milestone = Milestone.new(milestone_params)
     if @milestone.save
       render json: { milestone: @milestone }, status: 201
@@ -86,10 +85,11 @@ class Api::V1::MilestonesController < ApplicationController
   end
 
   def set_organization_current_user
+   if @current_user.organizations.count > 0
     params[:milestone][:organization_id] ||= @current_user.organizations.first.id
+   end
   end
   def milestone_params
-
     params.require(:milestone).permit(:name, :percent_complete, :data_started, :due_date, :cost, :organization_id)
   end
 end

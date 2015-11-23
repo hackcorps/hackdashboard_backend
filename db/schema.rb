@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120180502) do
+ActiveRecord::Schema.define(version: 20151123120705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,30 @@ ActiveRecord::Schema.define(version: 20151120180502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "stand_up_summaries", force: :cascade do |t|
+    t.datetime "noted_date"
+    t.string   "text"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "stand_up_summaries", ["organization_id"], name: "index_stand_up_summaries_on_organization_id", using: :btree
+
+  create_table "stand_ups", force: :cascade do |t|
+    t.string   "update_text"
+    t.date     "noted_at"
+    t.integer  "user_id"
+    t.integer  "milestone_id"
+    t.integer  "stand_up_summary_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "stand_ups", ["milestone_id"], name: "index_stand_ups_on_milestone_id", using: :btree
+  add_index "stand_ups", ["stand_up_summary_id"], name: "index_stand_ups_on_stand_up_summary_id", using: :btree
+  add_index "stand_ups", ["user_id"], name: "index_stand_ups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -69,4 +93,8 @@ ActiveRecord::Schema.define(version: 20151120180502) do
   add_index "users_organizations", ["user_id"], name: "index_users_organizations_on_user_id", using: :btree
 
   add_foreign_key "milestones", "organizations"
+  add_foreign_key "stand_up_summaries", "organizations"
+  add_foreign_key "stand_ups", "milestones"
+  add_foreign_key "stand_ups", "stand_up_summaries"
+  add_foreign_key "stand_ups", "users"
 end
