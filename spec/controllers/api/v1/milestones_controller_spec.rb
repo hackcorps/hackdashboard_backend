@@ -134,7 +134,7 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
      @milestone = FactoryGirl.create :milestone
     end
 
-    it 'delete milestone' do
+    it 'deletes milestone' do
       expect { delete :destroy, id: @milestone.id }.to change(Milestone, :count).by(-1)
     end
     it 'responds with status 200' do

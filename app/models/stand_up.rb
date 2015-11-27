@@ -7,4 +7,12 @@ class StandUp < ActiveRecord::Base
   validates :noted_at, presence: true
   validates :user, presence: true
   validates :milestone, presence: true
+
+  before_save :calculate_milestone_cost
+
+  def calculate_milestone_cost
+    cost = self.milestone.cost + (self.user.cost_per_month*8)/168
+    self.milestone.update(cost: cost)
+  end
+
 end

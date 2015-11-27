@@ -50,7 +50,7 @@ RailsAdmin.config do |config|
       # configuration here
     end
 
-    include_fields :id, :email, :role, :full_name, :organizations
+    include_fields :id, :email, :role, :full_name, :organizations, :cost_per_month
   end
 
   def custom_label_method_user
