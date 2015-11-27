@@ -27,14 +27,16 @@ RSpec.describe Milestone, type: :model do
 
     describe 'set default value ' do
       it ' should percent_complete' do
-        expect(milestone.percent_complete).not_to be_nil
         milestone.save!
         expect(milestone.percent_complete).not_to be_nil
       end
       it ' should data_started' do
-        expect(milestone.data_started).not_to be_nil
         milestone.save!
         expect(milestone.data_started).not_to be_nil
+      end
+      it ' should cost' do
+        milestone.save!
+        expect(milestone.cost).not_to be_nil
       end
     end
 
