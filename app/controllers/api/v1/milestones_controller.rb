@@ -68,7 +68,7 @@ class Api::V1::MilestonesController < ApplicationController
     if @milestone.update(milestone_params)
       render json: { milestone: @milestone }, status: 200
     else
-      render json:{ errors: @milestone.errors }, status: 422
+      render json:{ errors: @milestone.errors }
     end
   end
 
