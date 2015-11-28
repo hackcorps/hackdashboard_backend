@@ -89,6 +89,7 @@ class Api::V1::MilestonesController < ApplicationController
     params[:milestone][:organization_id] ||= @current_user.organizations.first.id
    end
   end
+
   def milestone_params
     params.require(:milestone).permit(:name, :percent_complete, :data_started, :due_date, :cost, :organization_id)
   end

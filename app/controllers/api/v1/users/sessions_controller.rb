@@ -6,7 +6,6 @@ class Api::V1::Users::SessionsController < ApplicationController
 	# Disable CSRF protection
   skip_before_action :verify_authenticity_token
 
-	# Be sure to enable JSON.
 	respond_to :html, :json
 
 	swagger_api :create do
@@ -23,7 +22,6 @@ class Api::V1::Users::SessionsController < ApplicationController
   end
 
 	def create
-		#return failer unless User.new(user_params).valid?
 		user = User.find_by_email(params[:user][:email])
 		user && user.valid_password?(params[:user][:password]) ? sign_in_user(user) : failer
 	end
