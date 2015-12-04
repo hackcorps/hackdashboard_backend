@@ -34,11 +34,8 @@ RailsAdmin.config do |config|
       field :role, :enum do
         enum { User::ROLES }
       end
-      field :organizations
-      #field :organization, :enum do
-       # enum { Organization::organization_names }
-      #end
 
+      field :organizations
     end
 
     configure :users_organizations do

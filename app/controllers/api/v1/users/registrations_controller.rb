@@ -20,5 +20,4 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
      render json: {errors: ['Your invite expired.']}, status: 419
   end
 
-
 end

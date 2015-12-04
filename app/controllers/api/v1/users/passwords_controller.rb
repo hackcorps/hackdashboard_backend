@@ -4,6 +4,7 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 
   def create
     @user = User.send_reset_password_instructions(params[:user])
+
     if successfully_sent?(@user)
       render json: { success: true }, status: 200
     else
@@ -13,7 +14,6 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 
   def update
     @user = User.reset_password_by_token(params[:user])
-    yield @user if block_given?
 
     if @user.errors.empty?
       @user.unlock_access! if unlockable?(@user)
