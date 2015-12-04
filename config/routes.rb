@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+  namespace :v1 do
+    get 'stand_up_summary/create'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'stand_up_summary/update'
+    end
+  end
+
 	root 'home#index'
 
 	devise_for :admin
@@ -19,6 +31,7 @@ Rails.application.routes.draw do
 		namespace :v1 do
       resources :milestones
 			resources :stand_ups
+      resources :stand_up_summaries
     end
   end
 
