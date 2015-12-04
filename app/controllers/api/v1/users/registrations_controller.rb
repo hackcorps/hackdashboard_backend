@@ -5,7 +5,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.find_by!(invite_token: params[:user][:invite_token])
-    return expired unless @user.invite_token_period_valid?(2)
+    #return expired unless @user.invite_token_period_valid?(2)
       if @user.update(full_name: params[:user][:full_name], password: params[:user][:password],
           password_confirmation: params[:user][:password_confirmation], invite_token: nil,  invite_token_sent_at: nil )
         render json: { success: true, user: { email: @user.email, role: @user.role, auth_token: AuthenticationService.new(@user).auth_token } }, status: 201
