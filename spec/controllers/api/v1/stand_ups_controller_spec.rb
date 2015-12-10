@@ -28,7 +28,7 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
         expect(response.status).to eq 200
       end
 
-      it 'responds with user  stand-up' do
+      it 'responds with user\'s stand-up' do
         FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
         FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
 

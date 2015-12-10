@@ -44,14 +44,14 @@ class Api::V1::StandUpsController < ApplicationController
   end
 
   def index
-    render json: { stand_ups: StandUp.where('noted_at = ?', Date.today) }, status: 200
+    render json: StandUp.where('noted_at = ?', Date.today), status: 200
   end
 
   def create
     @stand_up = @current_user.stand_ups.new(stand_up_params)
 
     if @stand_up.save
-      render json: { stand_up: @stand_up }, status: 201
+      render json: @stand_up, status: 201
     else
       render json: { errors: @stand_up.errors }, status: 422
     end
@@ -59,7 +59,7 @@ class Api::V1::StandUpsController < ApplicationController
 
   def update
    if  @stand_up.update( stand_up_params)
-     render json: { stand_up: @stand_up }, status: 200
+     render json: @stand_up, status: 200
    else
      render json: { errors: @stand_up.errors }
    end

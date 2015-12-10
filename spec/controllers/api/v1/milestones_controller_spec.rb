@@ -4,6 +4,10 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
   let(:organization_first)  { FactoryGirl.create(:organization) }
   let(:organization_second)  { FactoryGirl.create(:organization) }
   let(:milestone) { FactoryGirl.create :milestone }
+
+
+
+
   let(:valid_attributes) do
     {
       name: 'Task 1',
@@ -97,6 +101,7 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
   end
 
   describe 'PUT #update' do
+
     context 'with valid params' do
       before :each do
        put :update, id: milestone.id, milestone: valid_attributes
@@ -111,7 +116,7 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
         expect( response.status ). to eq(200)
       end
       it 'responds with milestone' do
-         expect(response.body).to eq({ milestone: milestone }.to_json)
+        expect(JSON.parse(response.body)['milestone']).not_to be_nil
       end
     end
 
