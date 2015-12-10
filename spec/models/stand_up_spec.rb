@@ -7,7 +7,7 @@ RSpec.describe StandUp, type: :model do
 
     it { should belong_to :user }
     it { should belong_to :milestone }
-    it { should belong_to :stand_up_summaries }
+    it { should belong_to :stand_up_summary }
 
     it { should respond_to(:update_text) }
     it { should respond_to(:noted_at) }

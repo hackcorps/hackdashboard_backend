@@ -10,7 +10,7 @@ class Api::V1::UsersController < ActionController::Base
     if @user
       if @user.update(full_name: params[:user][:full_name], password: params[:user][:password],
                       password_confirmation: params[:user][:password_confirmation], invite_token: '' )
-        render json: { user: @user }, status: 422
+        render json: @user, status: 422
       else
         render json: { errors: @user.errors.full_messages }, status: 422
       end

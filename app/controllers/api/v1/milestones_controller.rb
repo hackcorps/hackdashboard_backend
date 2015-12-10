@@ -52,13 +52,13 @@ class Api::V1::MilestonesController < ApplicationController
   end
 
   def index
-    render json: { milestones: current_user.organizations.first.milestones }, status: 200
+    render json: current_user.organizations.first.milestones, status: 200
   end
 
   def create
     @milestone = Milestone.new(milestone_params)
     if @milestone.save
-      render json: { milestone: @milestone }, status: 201
+      render json: @milestone, status: 201
     else
       render json: {  errors: @milestone.errors }, status: 422
     end
@@ -66,7 +66,7 @@ class Api::V1::MilestonesController < ApplicationController
 
   def update
     if @milestone.update(milestone_params)
-      render json: { milestone: @milestone }, status: 200
+      render json: @milestone, status: 200
     else
       render json:{ errors: @milestone.errors }
     end
