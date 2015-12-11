@@ -21,6 +21,7 @@ RSpec.describe StandUp, type: :model do
     end
 
     context 'when create stand-up' do
+
       it 'calculates cost of milestone' do
         stand_up = FactoryGirl.build(:stand_up, milestone: milestone, user: team_member)
         cost = milestone.cost
@@ -28,4 +29,13 @@ RSpec.describe StandUp, type: :model do
         expect(stand_up.milestone.cost).to eq(cost + (stand_up.user.cost_per_month*8)/168)
       end
     end
+
+    context 'when create more than one stand-up by day' do
+      it "should raise" do
+        FactoryGirl.create(:stand_up, milestone: milestone, user: team_member)
+        expect{FactoryGirl.create(:stand_up, milestone: milestone, user: team_member)}.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+
 end

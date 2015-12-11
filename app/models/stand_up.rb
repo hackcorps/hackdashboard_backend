@@ -7,6 +7,7 @@ class StandUp < ActiveRecord::Base
   validates :noted_at, presence: true
   validates :user, presence: true
   validates :milestone, presence: true
+  validate :user_stand_up_by_day, on: [ :create ], :unless => lambda { self.noted_at.nil?  }
 
   before_save :calculate_milestone_cost
 
@@ -15,4 +16,10 @@ class StandUp < ActiveRecord::Base
     self.milestone.update(cost: cost)
   end
 
+  private
+  def user_stand_up_by_day
+    if self.user.stand_ups.where(:noted_at => self.noted_at).count >= 1
+      errors.add(:daily_limit, "Exceeds daily limit creating a stand-up")
+    end
+  end
 end

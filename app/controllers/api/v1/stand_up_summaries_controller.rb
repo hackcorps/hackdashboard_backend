@@ -12,7 +12,7 @@ class Api::V1::StandUpSummariesController < ApplicationController
   end
 
   def index
-    start_time = Date.today.beginning_of_week
+    start_time = Time.zone.now.beginning_of_week
     render json: @organization.stand_up_summaries.where('noted_date between ? and ?', start_time, start_time + 6.days), status: 200
     end
 

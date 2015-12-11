@@ -16,16 +16,15 @@ RSpec.describe Api::V1::StandUpSummariesController, type: :controller do
     sign_in :project_manager
 
     describe 'GET #index' do
-
       it 'responds with status 200' do
         get :index
 
         expect(response.status).to eq 200
       end
       it 'respond with stand-ups at stand-up summaries of user\' organization ' do
-        milestone = FactoryGirl.create(:milestone,due_date: Date.today, organization_id: @current_user.organizations.first.id )
+        milestone = FactoryGirl.create(:milestone,due_date: Date.today, organization_id: @current_user.organizations.first.id)
         stand_up = FactoryGirl.create(:stand_up, milestone: milestone, user: @current_user )
-        FactoryGirl.create(:stand_up_summary, organization_id: @current_user.organizations.first.id )
+        FactoryGirl.create(:stand_up_summary, organization_id: @current_user.organizations.first.id)
 
         get :index
 
@@ -33,19 +32,20 @@ RSpec.describe Api::V1::StandUpSummariesController, type: :controller do
       end
 
       it 'respond with stand-up summaries of user\' organization' do
-        FactoryGirl.create_list(:stand_up_summary, 2,  organization_id: @current_user.organizations.first.id )
-          get :index
+        FactoryGirl.create(:stand_up_summary, organization_id: @current_user.organizations.first.id)
 
-        expect(JSON.parse(response.body)['stand_up_summaries'].count).to eq(2)
+        get :index
+
+        expect(JSON.parse(response.body)['stand_up_summaries'].count).to eq(1)
       end
 
       it 'respond with stand-up summaries of user\' organization from a week' do
-        FactoryGirl.create_list(:stand_up_summary, 2, noted_date: Date.today.beginning_of_week+1, organization_id: @current_user.organizations.first.id )
+        FactoryGirl.create(:stand_up_summary, noted_date: Date.today.beginning_of_week+1, organization_id: @current_user.organizations.first.id)
         FactoryGirl.create(:stand_up_summary, noted_date: Date.today.beginning_of_week+8, organization_id: @current_user.organizations.first.id)
 
         get :index
 
-        expect(JSON.parse(response.body)['stand_up_summaries'].count).to eq(2)
+        expect(JSON.parse(response.body)['stand_up_summaries'].count).to eq(1)
       end
     end
 
