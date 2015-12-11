@@ -25,9 +25,14 @@ RSpec.describe StandUpSummary, type: :model do
   context 'when create stand-up summary' do
     it 'associate with its daily stand-up' do
       stand_up_first = FactoryGirl.create(:stand_up, milestone: milestone, user: project_manager)
-      stand_up_second = FactoryGirl.create(:stand_up, milestone: milestone, user: project_manager)
       stand_up_summary = FactoryGirl.create(:stand_up_summary, organization_id: organization.id)
-      expect(stand_up_summary.stand_ups.count).to eq(2)
+      expect(stand_up_summary.stand_ups.count).to eq(1)
+    end
+  end
+  context 'when create more than one stand-up summary by day' do
+    it "should raise" do
+      FactoryGirl.create(:stand_up_summary, organization: organization )
+      expect{ FactoryGirl.create(:stand_up_summary, organization: organization)}.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 
