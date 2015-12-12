@@ -1,0 +1,41 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://hackdashboard.herokuapp.com/api/v1/",
+  "resourcePath": "stand_up_summaries",
+  "apis": [
+    {
+      "path": "stand_up_summaries",
+      "operations": [
+        {
+          "summary": "Create a stand-up summary.",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "stand_up_summary[text]",
+              "type": "string",
+              "description": "Update Text",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "stand_up_summary[noted_date]",
+              "type": "date",
+              "description": "Noted at",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "post",
+          "nickname": "Api::V1::StandUpSummaries#create"
+        }
+      ]
+    }
+  ]
+}

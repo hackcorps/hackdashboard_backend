@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::StandUpsController, type: :controller do
   let(:organization)  { FactoryGirl.create(:organization) }
-  let(:milestone) { FactoryGirl.create(:milestone, organization_id: organization.id ) }
-  let(:team_member) { FactoryGirl.create(:team_member, email: 'teammember@gmail.com', organization_ids:  [ organization.id ] ) }
-  let(:stand_up) { FactoryGirl.create(:stand_up, user_id: team_member.id, milestone_id: milestone.id ) }
+  let(:milestone) { FactoryGirl.create(:milestone, organization_id: organization.id) }
+  let(:team_member) { FactoryGirl.create(:team_member, email: 'teammember@gmail.com', organization_ids:  [ organization.id ]) }
+  let(:stand_up) { FactoryGirl.create(:stand_up, user_id: team_member.id, milestone_id: milestone.id) }
   let(:params) { Hash[ update_text: Faker::Lorem.sentence(9), noted_at: Date.today ] }
 
   context 'SIGN IN' do
 
     sign_in :team_member
 
-    let(:milestone) { FactoryGirl.create(:milestone, organization:  @current_user.organizations.first ) }
+    let(:milestone) { FactoryGirl.create(:milestone, organization:  @current_user.organizations.first) }
     let(:valid_attributes) do
       {
           update_text: Faker::Lorem.sentence(9),
@@ -27,13 +27,13 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
         expect(response.status).to eq 200
       end
 
-      it 'responds with user  stand-up' do
-        FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
-        FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
+      it 'responds with user\'s stand-up' do
+        FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id)
+        FactoryGirl.create(:stand_up, user_id: team_member.id, milestone_id: milestone.id)
 
         get :index
 
-        expect( JSON.parse(response.body)['stand_ups'].count ).to eq(2)
+        expect(JSON.parse(response.body)['stand_ups'].count).to eq(2)
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
         it 'responds with status 201' do
           post :create, stand_up: valid_attributes
 
-          expect( response.status ).to eq(201)
+          expect(response.status).to eq(201)
         end
         it 'responds with stand-up' do
           post :create, stand_up: valid_attributes
@@ -75,7 +75,7 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
       describe 'PUT #update' do
 
       before :each do
-        @stand_up = FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
+        @stand_up = FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id)
       end
 
       context 'with valid params' do
@@ -114,7 +114,7 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
 
     describe 'DELETE #destroy' do
       before :each do
-        @stand_up = FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id )
+        @stand_up = FactoryGirl.create(:stand_up, user_id: @current_user.id, milestone_id: milestone.id)
       end
 
       it 'responds with status 200' do
@@ -139,7 +139,7 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
 
     describe "POST #create" do
       it 'responds with status 401' do
-        post :create, stand_up: FactoryGirl.attributes_for( :stand_up, milestone_id: milestone.id )
+        post :create, stand_up: FactoryGirl.attributes_for(:stand_up, milestone_id: milestone.id)
 
         expect(response.status).to eq 401
       end

@@ -5,7 +5,7 @@ class CreateStandUps < ActiveRecord::Migration
       t.date :noted_at
       t.references :user, index: true, foreign_key: true
       t.references :milestone, index: true, foreign_key: true
-      t.references :stand_up_summary, index: true, foreign_key: true
+      t.references :stand_up_summaries, index: true, foreign_key: true
 
       t.timestamps null: false
     end

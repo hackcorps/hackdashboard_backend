@@ -24,7 +24,7 @@ class Api::V1::UsersController < ActionController::Base
     params.require(:user).permit(:full_name, :password, :password_confirmation, :invite_token)
   end
 
-	def build_params
+  def build_params
 		{
 			full_name: user_params[:full_name],
 			password: user_params[:password],
