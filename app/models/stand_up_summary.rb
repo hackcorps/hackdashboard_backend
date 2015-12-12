@@ -1,6 +1,6 @@
 class StandUpSummary < ActiveRecord::Base
   belongs_to :organization
-  has_many :stand_ups
+  has_many :stand_ups, dependent: :destroy
 
   before_create :update_daily_stand_up
   validates :text, presence: true, length: {in: 2..1000 }
