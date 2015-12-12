@@ -7,7 +7,6 @@ class StandUpSummary < ActiveRecord::Base
   validates :noted_date, presence: true
   validates :organization, presence: true
   validate :organization_stand_up_summary_by_day, on: [ :create ], :unless => lambda { self.noted_date.nil? }
-
   def update_daily_stand_up
     self.stand_ups = StandUp.where("noted_at = ?", self.noted_date)
   end
@@ -19,5 +18,4 @@ class StandUpSummary < ActiveRecord::Base
       errors.add(:daily_limit, "Exceeds daily limit creating stand-up summary")
     end
   end
-
 end

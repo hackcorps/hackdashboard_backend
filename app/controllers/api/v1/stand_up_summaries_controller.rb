@@ -1,6 +1,6 @@
 class Api::V1::StandUpSummariesController < ApplicationController
   before_action :authenticate_user_from_token!
-  before_action :get_organization_from_current_user, only: [:create, :index, :destroy]
+  before_action :get_organization_from_current_user
 
   swagger_controller :stand_up_summaries, 'StandUpSummaries'
 
@@ -27,6 +27,13 @@ class Api::V1::StandUpSummariesController < ApplicationController
   end
 
   def update
+    @stand_up_summary = @organization.stand_up_summaries.find(params[:id])
+
+    if @stand_up_summary.update(text: stand_up_summary_params[:text])
+      render json: @stand_up_summary, status: 200
+    else
+      render json: { errors: @stand_up_summary.errors }
+    end
   end
 
   def destroy

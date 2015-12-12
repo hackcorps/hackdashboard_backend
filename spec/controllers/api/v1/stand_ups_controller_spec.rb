@@ -90,7 +90,6 @@ RSpec.describe Api::V1::StandUpsController, type: :controller do
           expect(@stand_up.reload.update_text).to eq params[:update_text]
         end
         it 'responds with stand-up' do
-
           put :update, id: @stand_up.id, stand_up: params
 
           expect(JSON.parse(response.body)['stand_up']).not_to be_nil
