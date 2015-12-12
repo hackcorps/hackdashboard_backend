@@ -8,7 +8,24 @@
       "path": "stand_up_summaries",
       "operations": [
         {
-          "summary": "Create a stand-up summary.",
+          "summary": "Return all stand-ups summaries of user's organization .",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::StandUpSummaries#index"
+        }
+      ]
+    },
+    {
+      "path": "stand_up_summaries",
+      "operations": [
+        {
+          "summary": "Create a stand-up summary .",
           "parameters": [
             {
               "paramType": "form",
@@ -36,6 +53,100 @@
           "nickname": "Api::V1::StandUpSummaries#create"
         }
       ]
+    },
+    {
+      "path": "stand_up_summaries/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing stand-up summary",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Stand-up summary ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "stand_up_summary[text]",
+              "type": "string",
+              "description": "Text",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "method": "patch",
+          "nickname": "Api::V1::StandUpSummaries#update"
+        }
+      ]
+    },
+    {
+      "path": "stand_up_summaries/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing stand-up summary",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Stand-up summary ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "method": "delete",
+          "nickname": "Api::V1::StandUpSummaries#destroy"
+        }
+      ]
     }
-  ]
+  ],
+  "models": {
+    "StandUpSummary": {
+      "id": "StandUpSummary",
+      "required": [
+        "id",
+        "text",
+        "noted_date",
+        "organization_id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Stand-up summary ID"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text"
+        },
+        "noted_date": {
+          "type": "date",
+          "description": "Noted date"
+        },
+        "organization_id": {
+          "type": "integer",
+          "description": "Organization ID"
+        }
+      },
+      "description": "A Stand-up Summary object."
+    }
+  }
 }

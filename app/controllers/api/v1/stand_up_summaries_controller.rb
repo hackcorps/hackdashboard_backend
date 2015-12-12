@@ -5,11 +5,40 @@ class Api::V1::StandUpSummariesController < ApplicationController
   swagger_controller :stand_up_summaries, 'StandUpSummaries'
 
   swagger_api :create do
-    summary 'Create a stand-up summary.'
+    summary 'Create a stand-up summary .'
     param :form, 'stand_up_summary[text]', :string, :required, 'Update Text'
     param :form, 'stand_up_summary[noted_date]', :date, :required, 'Noted at'
     response :unauthorized
   end
+
+  swagger_api :index do
+    summary 'Return all stand-ups summaries of user\'s organization .'
+    response :unauthorized
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing stand-up summary'
+    param :path, :id, :integer, :required, "Stand-up summary ID"
+    param :form, 'stand_up_summary[text]', :string, :optional, 'Text'
+    response :not_found
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing stand-up summary"
+    param :path, :id, :integer, :required, "Stand-up summary ID"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_model :StandUpSummary do
+    description "A Stand-up Summary object."
+    property :id, :integer, :required, "Stand-up summary ID"
+    property :text, :string, :required, "Text"
+    property :noted_date, :date, :required, "Noted date"
+    property :organization_id, :integer, :required, "Organization ID"
+  end
+
+
 
   def index
     start_time = Time.zone.now.beginning_of_week
@@ -41,6 +70,7 @@ class Api::V1::StandUpSummariesController < ApplicationController
 
     render json: {}, status: 200
   end
+
   private
 
   def get_organization_from_current_user
