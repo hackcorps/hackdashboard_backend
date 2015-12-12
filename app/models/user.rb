@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
 
 	ROLES = %w(Admin Customer TeamMember ProjectManager)
 
-	devise :database_authenticatable, :registerable,
-				 :recoverable, :rememberable, :trackable
+	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
 
 	validates :email, format: Devise.email_regexp
 	validates :password, presence: true, allow_blank: false, on: :create, :unless => lambda { self.full_name.blank? }
@@ -39,7 +38,8 @@ class User < ActiveRecord::Base
 	  self.invite_token = loop do
 			random_token = SecureRandom.urlsafe_base64(nil, false)
 			break random_token unless User.exists?(invite_token: random_token)
-		end
+	  end
+
 		self.invite_token_sent_at = Time.zone.now
 	end
 end
