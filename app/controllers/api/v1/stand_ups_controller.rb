@@ -37,6 +37,7 @@ class Api::V1::StandUpsController < ApplicationController
   swagger_model :StandUp do
     description "A Stand-up object."
     property :id, :integer, :required, "Stand-up ID"
+    property :update_text, :string, :required, "Update Text"
     property :noted_at, :date, :required, "Noted at"
     property :milestone_id, :integer, :required, "Milestone ID"
     property :user_id, :integer, :required, "User ID"
@@ -64,7 +65,6 @@ class Api::V1::StandUpsController < ApplicationController
      render json: { errors: @stand_up.errors }
    end
   end
-
 
   def destroy
     @stand_up.destroy

@@ -150,6 +150,7 @@
       "id": "StandUp",
       "required": [
         "id",
+        "update_text",
         "noted_at",
         "milestone_id",
         "user_id"
@@ -158,6 +159,10 @@
         "id": {
           "type": "integer",
           "description": "Stand-up ID"
+        },
+        "update_text": {
+          "type": "string",
+          "description": "Update Text"
         },
         "noted_at": {
           "type": "date",
