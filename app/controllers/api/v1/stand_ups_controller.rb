@@ -58,7 +58,7 @@ class Api::V1::StandUpsController < ApplicationController
   end
 
   def update
-   if  @stand_up.update( stand_up_params)
+   if @stand_up.update(stand_up_params)
      render json: @stand_up, status: 200
    else
      render json: { errors: @stand_up.errors }

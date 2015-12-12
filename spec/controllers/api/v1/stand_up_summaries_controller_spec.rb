@@ -5,6 +5,7 @@ RSpec.describe Api::V1::StandUpSummariesController, type: :controller do
   let(:organization)  { FactoryGirl.create(:organization) }
   let(:milestone)  { FactoryGirl.create(:milestone,due_date: Date.today, organization_id: @current_user.organizations.first.id) }
   let(:stand_up_summary) { FactoryGirl.create(:stand_up_summary, organization_id: @current_user.organizations.first.id) }
+  let(:params) { Hash[ text: Faker::Lorem.sentence(9) ] }
 
   let(:valid_attributes) do
     {
@@ -70,6 +71,41 @@ RSpec.describe Api::V1::StandUpSummariesController, type: :controller do
       end
     end
 
+    describe 'PUT #update' do
+
+      context 'with valid params' do
+        it 'responds with status 200' do
+          put :update, id: stand_up_summary.id, stand_up_summary: params
+
+          expect(response.status).to eq 200
+        end
+        it 'updates stand-up summary' do
+          put :update, id: stand_up_summary.id, stand_up_summary: params
+
+          expect(stand_up_summary.reload.text).to eq params[:text]
+        end
+        it 'responds with stand-up' do
+          put :update, id: stand_up_summary.id, stand_up_summary: params
+
+          expect(JSON.parse(response.body)['stand_up_summary']).not_to be_nil
+        end
+
+      end
+
+      context 'with invalid params' do
+        it 'responds with errors' do
+          put :update, id: stand_up_summary.id, stand_up_summary: {text: ''}
+
+          expect(JSON.parse(response.body)['errors']).not_to be_nil
+        end
+        it 'respond with status 404' do
+          put :update, id: 0, stand_up_summary: params
+
+          expect(response.status).to eq(404)
+        end
+      end
+    end
+
     describe 'DELETE #destroy' do
       before :each do
         @stand_up = FactoryGirl.create(:stand_up, milestone: milestone, user: @current_user )
@@ -123,6 +159,15 @@ RSpec.describe Api::V1::StandUpSummariesController, type: :controller do
         expect(response.status).to eq 401
       end
     end
+
+    describe 'PUT #update' do
+      it 'responds with status 401' do
+        put :update, id: stand_up_summary.id
+
+        expect(response.status).to eq 401
+      end
+    end
+
   end
 
 end
