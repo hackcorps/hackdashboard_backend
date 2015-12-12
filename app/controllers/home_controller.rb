@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 	def index
-		render text: 'Hello guys'
+		render text: ''
 	end
 
 	def api

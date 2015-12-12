@@ -11,5 +11,4 @@ class UsersOrganization < ActiveRecord::Base
   def send_notification_user
     UserMailer.notification_user(user.email, user.full_name, organization.name).deliver_now if user.full_name.present?
   end
-
 end

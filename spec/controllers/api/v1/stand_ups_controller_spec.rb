@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::StandUpsController, type: :controller do
-
   let(:organization)  { FactoryGirl.create(:organization) }
   let(:milestone) { FactoryGirl.create(:milestone, organization_id: organization.id) }
   let(:team_member) { FactoryGirl.create(:team_member, email: 'teammember@gmail.com', organization_ids:  [ organization.id ]) }

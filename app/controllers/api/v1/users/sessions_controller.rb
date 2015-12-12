@@ -37,13 +37,7 @@ class Api::V1::Users::SessionsController < ApplicationController
 	end
 
 	def sign_in_user(resource)
-		render json: {
-										user: {
-														email: resource.email,
-														role: resource.role,
-														auth_token: AuthenticationService.new(resource).auth_token
-										}
-		}
+		render json: { user: { email: resource.email, role: resource.role, role: resource.role, auth_token: AuthenticationService.new(resource).auth_token } }
 	end
 
 	def failer

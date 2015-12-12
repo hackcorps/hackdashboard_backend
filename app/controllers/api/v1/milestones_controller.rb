@@ -2,6 +2,7 @@ class Api::V1::MilestonesController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :set_organization_current_user, only: [:create]
   before_action :find_milestone, only: [:update, :destroy]
+
   respond_to :json
 
   swagger_controller :milestones, 'Milestones'
@@ -57,6 +58,7 @@ class Api::V1::MilestonesController < ApplicationController
 
   def create
     @milestone = Milestone.new(milestone_params)
+
     if @milestone.save
       render json: @milestone, status: 201
     else
@@ -85,9 +87,9 @@ class Api::V1::MilestonesController < ApplicationController
   end
 
   def set_organization_current_user
-   if @current_user.organizations.count > 0
-    params[:milestone][:organization_id] ||= @current_user.organizations.first.id
-   end
+    if @current_user.organizations.count > 0
+      params[:milestone][:organization_id] ||= @current_user.organizations.first.id
+    end
   end
 
   def milestone_params
