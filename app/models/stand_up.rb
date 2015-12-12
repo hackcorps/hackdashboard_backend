@@ -17,6 +17,7 @@ class StandUp < ActiveRecord::Base
   end
 
   private
+
   def user_stand_up_by_day
     if self.user.stand_ups.where(:noted_at => self.noted_at).count >= 1
       errors.add(:daily_limit, "Exceeds daily limit creating a stand-up")
