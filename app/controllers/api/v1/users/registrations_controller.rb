@@ -18,7 +18,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def registration_params
-    require(:user).permit(:full_name, :password, :password_confirmation, :invite_token)
+    params.require(:user).permit(:full_name, :password, :password_confirmation, :invite_token)
   end
 
   def build_params

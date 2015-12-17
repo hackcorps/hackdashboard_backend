@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
     self.role == 'TeamMember'
   end
 
-	def invite_token_period_valid?(invite_token_within)
-		self.invite_token_sent_at && self.invite_token_sent_at.utc > invite_token_within.day.ago
+	def invite_token_period_valid?(invite_token_within = 0)
+		self.invite_token_sent_at + invite_token_within.days >= DateTime.now
 	end
 
 	private
