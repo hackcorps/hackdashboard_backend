@@ -1,6 +1,6 @@
 class Milestone < ActiveRecord::Base
   belongs_to :organization
-  has_many :stand_ups
+  has_many :stand_ups, dependent: :nullify
 
   after_initialize :set_default_values
 
