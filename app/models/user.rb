@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :users_organizations, dependent: :delete_all
 	has_many :organizations, through: :users_organizations
-  has_many :stand_ups
+  has_many :stand_ups, dependent: :nullify
 
 	before_create :send_invite, :unless => :is_admin?
 
