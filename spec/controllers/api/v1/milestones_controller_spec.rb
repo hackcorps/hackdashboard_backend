@@ -5,9 +5,6 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
   let(:organization_second)  { FactoryGirl.create(:organization) }
   let(:milestone) { FactoryGirl.create :milestone }
 
-
-
-
   let(:valid_attributes) do
     {
       name: 'Task 1',
@@ -38,6 +35,7 @@ RSpec.describe Api::V1::MilestonesController, type: :controller do
       get :index
       expect(response.status).to eq 200
     end
+
     it 'respond with milestones' do
      FactoryGirl.create_list(:milestone, 2, organization_id: @current_user.organizations.first.id)
 
